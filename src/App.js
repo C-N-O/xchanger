@@ -1,25 +1,60 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ExchangeRate from './components/ExchangeRate';
+import Dropdown from './components/Dropdown';
 import './App.css';
 
-function App() {
+const currencies = [
+  {
+    name: 'Canadian Dollars',
+    label: 'CAD',
+    value: 'cad',
+  },
+  {
+    name: 'UAE Dirham',
+    label: 'AED',
+    value: 'aed',
+  },
+  {
+    name: 'United States Dollars',
+    label: 'USD',
+    value: 'usd',
+  },
+  {
+    name: 'Nigerian Naira',
+    label: 'NGN',
+    value: 'ngn',
+  },
+];
+
+const App = () => {
+  const [baseCurrency, setBaseCurrency] = useState('');
+  const [targetCurrency, setTargetCurrency] = useState('');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className='dropdowns'>
+        <Dropdown
+          label='Base Currency'
+          currencies={currencies}
+          selectedCurrency={baseCurrency}
+          onSelectedOptionChange={setBaseCurrency}
+        />
+
+        <Dropdown
+          label='Target Currency'
+          currencies={currencies}
+          selectedCurrency={targetCurrency}
+          onSelectedOptionChange={setTargetCurrency}
+        />
+      </div>
+      <div>
+        <ExchangeRate
+          name={targetCurrency.name}
+          baseCurrency={baseCurrency}
+          targetCurrency={targetCurrency}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
