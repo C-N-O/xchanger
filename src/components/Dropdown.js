@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ExchangeRate from './ExchangeRate';
 
 const Dropdown = (props) => {
   const [open, setOpen] = useState(false); //we use this state to determin when to add or remove our visible classes
